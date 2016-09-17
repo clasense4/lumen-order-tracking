@@ -51,4 +51,24 @@ class ProductTest extends TestCase
                 'status' => 200,
              ]);
     }
+
+    /**
+     * A basic functional Product Create Failed.
+     *
+     * @return void
+     */
+    public function testProductCreateFailed()
+    {
+        $this->json('POST', '/product/create',
+                [
+                    "name" => "Xiaomi Redmi 1S",
+                    "description" => "Entry level xiaomi",
+                    "price" => 1500000,
+                    "quantity" => 1
+                ]
+            )
+             ->seeJson([
+                'status' => 400,
+             ]);
+    }
 }
