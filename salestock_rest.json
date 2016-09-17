@@ -1,0 +1,242 @@
+{
+  "_type": "export",
+  "__export_format": 2,
+  "__export_date": "2016-09-17T15:42:13.500Z",
+  "__export_source": "insomnia.desktop.app:v3.4.1",
+  "resources": [
+    {
+      "modified": 1474126517594,
+      "created": 1474073091072,
+      "parentId": null,
+      "name": "SaleStock",
+      "_id": "wrk_it6h24g0WGMGTrwNDunQd",
+      "_type": "workspace"
+    },
+    {
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://127.0.0.1:8080/"
+      },
+      "modified": 1474073185196,
+      "created": 1474073094798,
+      "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
+      "_id": "env_it6h27biHZDpHfNCZY7a6",
+      "_type": "environment"
+    },
+    {
+      "name": "Default Jar",
+      "cookies": [],
+      "modified": 1474126804597,
+      "created": 1474073212737,
+      "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
+      "_id": "jar_it6h4qblZ9Ncet2v2rH69",
+      "_type": "cookie_jar"
+    },
+    {
+      "name": "Product",
+      "environment": {},
+      "modified": 1474095171218,
+      "created": 1474082285084,
+      "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
+      "_id": "fld_it6mj6l8nJB8TECRagGsQ6Zy",
+      "_type": "request_group"
+    },
+    {
+      "name": "Coupon",
+      "environment": {},
+      "modified": 1474082585903,
+      "created": 1474082585903,
+      "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
+      "_id": "fld_it6mpmpbXxEhQmUPDK9gdn5U",
+      "_type": "request_group"
+    },
+    {
+      "name": "Order",
+      "environment": {},
+      "modified": 1474095417683,
+      "created": 1474095417683,
+      "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
+      "_id": "fld_it6ucnrnC3yrVuAHejP5j9tR",
+      "_type": "request_group"
+    },
+    {
+      "url": "{{ base_url }}/",
+      "name": "Hello",
+      "method": "GET",
+      "body": "",
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "modified": 1474086195111,
+      "created": 1474073200057,
+      "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
+      "_id": "req_it6h4gjdCcfrTdVdZeDUH",
+      "_type": "request"
+    },
+    {
+      "name": "New Environment",
+      "data": {},
+      "modified": 1474073149367,
+      "created": 1474073149367,
+      "parentId": "env_it6h27biHZDpHfNCZY7a6",
+      "_id": "env_it6h3dfbR7KzSDaqZCw7E",
+      "_type": "environment"
+    },
+    {
+      "url": "{{ base_url }}/product/create",
+      "name": "Create",
+      "method": "POST",
+      "body": "{\n\t\"product_type_id\" : \"1\",\n\t\"name\" : \"Xiaomi Redmi 1S\",\n\t\"description\" : \"Entry level xiaomi\",\n\t\"price\" : 1500000,\n\t\"quantity\":1\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474095255647,
+      "created": 1474079390835,
+      "parentId": "fld_it6mj6l8nJB8TECRagGsQ6Zy",
+      "_id": "req_it6kt5df88yEguWaGrQ7nPJG",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/product/all",
+      "name": "All",
+      "method": "GET",
+      "body": "",
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "modified": 1474095221902,
+      "created": 1474082302131,
+      "parentId": "fld_it6mj6l8nJB8TECRagGsQ6Zy",
+      "_id": "req_it6mjjqrxUVvaCvw9XG6Mw7c",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/coupon/all",
+      "name": "All",
+      "method": "GET",
+      "body": "",
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "modified": 1474095276779,
+      "created": 1474082591244,
+      "parentId": "fld_it6mpmpbXxEhQmUPDK9gdn5U",
+      "_id": "req_it6mpqtoMb43tADZ8bcdKX5n",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/coupon/create",
+      "name": "Create",
+      "method": "POST",
+      "body": "{\n\t\"coupon_type_id\" : \"1\",\n\t\"code\" : \"zxcasd123\",\n\t\"description\" : \"Sample Coupon\",\n\t\"value\" : 10,\n\t\"quantity\" : 10,\n\t\"start_date\" : \"2016-09-17 00:00:00\",\n\t\"end_date\" : \"2016-09-19 00:00:00\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474091778187,
+      "created": 1474082597684,
+      "parentId": "fld_it6mpmpbXxEhQmUPDK9gdn5U",
+      "_id": "req_it6mpvskQW8UpBZ8hCskTRYY",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/order/all",
+      "name": "All",
+      "method": "GET",
+      "body": "",
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "modified": 1474108268045,
+      "created": 1474095427198,
+      "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
+      "_id": "req_it6ucv3ysHf26ShYfta4a3Mj",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/order/create",
+      "name": "Create without Coupon",
+      "method": "POST",
+      "body": "{\n\t\"user_id\" : \"1\",\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\" : \"77e42794-5816-47ea-a8df-95f4fbc3158c\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"43825c86-945c-46c5-b4b1-3544bf8b16bf\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t]\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474111945198,
+      "created": 1474096232402,
+      "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
+      "_id": "req_it6uu4eqsXJByWYtqtCvX6Vu",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/order/create",
+      "name": "Create (Coupon Percentage)",
+      "method": "POST",
+      "body": "{\n\t\"user_id\" : \"1\",\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\" : \"77e42794-5816-47ea-a8df-95f4fbc3158c\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"43825c86-945c-46c5-b4b1-3544bf8b16bf\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t\n\t],\n\t\"coupon_code\" : \"ss50\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474111275338,
+      "created": 1474097956636,
+      "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
+      "_id": "req_it6vv2u43v4ekaPuvASjGJHP",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/order/create",
+      "name": "Create (Coupon Amount)",
+      "method": "POST",
+      "body": "{\n\t\"user_id\" : \"1\",\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\" : \"77e42794-5816-47ea-a8df-95f4fbc3158c\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"43825c86-945c-46c5-b4b1-3544bf8b16bf\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss75\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474109867144,
+      "created": 1474108238776,
+      "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
+      "_id": "req_it71zgl48r7H6b2qvj2hCW2F",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/order/create",
+      "name": "Create (Coupon Expired)",
+      "method": "POST",
+      "body": "{\n\t\"user_id\" : \"1\",\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\" : \"77e42794-5816-47ea-a8df-95f4fbc3158c\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"43825c86-945c-46c5-b4b1-3544bf8b16bf\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss95\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474126523455,
+      "created": 1474126491720,
+      "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
+      "_id": "req_it7cuoncaXPNEfQQRRsYEX3t",
+      "_type": "request"
+    }
+  ]
+}
