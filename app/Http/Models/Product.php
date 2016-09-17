@@ -17,10 +17,11 @@ class Product extends Model
 
     public static $rules = [
         "product_type_id" => "required",
-        "name" => 'required',
-        "description" => 'required',
-        "price" => 'required',
-        "quantity" => 'required',
+        "name" => "required",
+        "description" => "required",
+        "price" => "required",
+        "quantity" => "required",
+        "sku_code" => "required",
     ];
 
     /**
@@ -28,13 +29,19 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['product_id','product_type_id', 'name', 'description', 'price', 'quantity'];
+    protected $fillable = ['product_id','product_type_id', 'name', 'description', 'price', 'quantity','sku_code'];
 
-    public static function newProduct($data){
+    public static function newProduct($data)
+    {
         // Embed product_id
         $data['product_id'] = Uuid::uuid4();
         // Validate product type
         $product = self::create($data);
         return true;
+    }
+
+    public static function getPrice($sku_code)
+    {
+        return self::where('sku_code',$sku_code)->firstOrFail();
     }
 }

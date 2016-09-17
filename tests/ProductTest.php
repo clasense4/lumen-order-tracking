@@ -41,10 +41,11 @@ class ProductTest extends TestCase
         $this->json('POST', '/product/create',
                 [
                     "product_type_id" => "1",
-                    "name" => "Xiaomi Redmi 1S",
-                    "description" => "Entry level xiaomi",
-                    "price" => 1500000,
-                    "quantity" => 1
+                    "name" => "Xiaomi Redmi Note",
+                    "description" => "Mid level xiaomi",
+                    "price" => 2000000,
+                    "quantity" => 5,
+                    "sku_code" => "XMRN1",
                 ]
             )
              ->seeJson([
@@ -53,7 +54,7 @@ class ProductTest extends TestCase
     }
 
     /**
-     * A basic functional Product Create Failed.
+     * A basic functional Product Create Failed, missing 1 param (product_type_id)
      *
      * @return void
      */
@@ -61,10 +62,11 @@ class ProductTest extends TestCase
     {
         $this->json('POST', '/product/create',
                 [
-                    "name" => "Xiaomi Redmi 1S",
-                    "description" => "Entry level xiaomi",
-                    "price" => 1500000,
-                    "quantity" => 1
+                    "name" => "Xiaomi Redmi Note 2",
+                    "description" => "Mid level xiaomi",
+                    "price" => 2100000,
+                    "quantity" => 5,
+                    "sku_code" => "XMRN2",
                 ]
             )
              ->seeJson([
