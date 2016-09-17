@@ -14,3 +14,8 @@
 $app->get('/', function () use ($app) {
     return 'Hello Lumen';
 });
+
+$app->group(['prefix' => 'product'], function () use ($app) {
+	$app->get('all', 'App\Http\Controllers\ProductController@all');
+	$app->post('create', 'App\Http\Controllers\ProductController@create');
+});
