@@ -18,9 +18,9 @@ class AlterTableCoupon extends Migration
             ALTER TABLE coupon
                 DROP COLUMN IF EXISTS end_date;
             ALTER TABLE coupon
-                ADD COLUMN start_date timestamp;
+                ADD COLUMN start_date timestamp default \'2016-09-16 00:00:00\';
             ALTER TABLE coupon
-                ADD COLUMN end_date timestamp;
+                ADD COLUMN end_date timestamp default \'2016-09-16 00:00:00\';
         ');
     }
 
