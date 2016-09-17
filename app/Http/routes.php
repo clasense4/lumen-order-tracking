@@ -16,6 +16,16 @@ $app->get('/', function () use ($app) {
 });
 
 $app->group(['prefix' => 'product'], function () use ($app) {
-	$app->get('all', 'App\Http\Controllers\ProductController@all');
-	$app->post('create', 'App\Http\Controllers\ProductController@create');
+    $app->get('all', 'App\Http\Controllers\ProductController@all');
+    $app->post('create', 'App\Http\Controllers\ProductController@create');
+});
+
+$app->group(['prefix' => 'coupon'], function () use ($app) {
+    $app->get('all', 'App\Http\Controllers\CouponController@all');
+    $app->post('create', 'App\Http\Controllers\CouponController@create');
+});
+
+$app->group(['prefix' => 'order'], function () use ($app) {
+    $app->get('all', 'App\Http\Controllers\OrderController@all');
+    $app->post('create', 'App\Http\Controllers\OrderController@create');
 });
