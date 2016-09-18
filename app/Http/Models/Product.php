@@ -40,7 +40,7 @@ class Product extends Model
         return true;
     }
 
-    public static function getPrice($sku_code)
+    public static function bySku($sku_code)
     {
         return self::where('sku_code',$sku_code)->firstOrFail();
     }
@@ -51,17 +51,23 @@ class Product extends Model
         $result = [];
 
         foreach ($products as $key => $value) {
-            $products[$key]['price'] = Product::getPrice($value['sku_code'])->price;
-            $products[$key]['sub_total'] = $value['quantity'] * Product::getPrice($value['sku_code'])->price;
+            $productModel = Product::bySku($value['sku_code']);
+            $products[$key]['price'] = $productModel->price;
+            $products[$key]['sub_total'] = $value['quantity'] * $productModel->price;
 
             // if order id given add to array
             if (($order_id) && ($time)) {
                 $products[$key]['order_detail_id'] = Uuid::uuid4();
                 $products[$key]['order_id'] = $order_id;
-                $products[$key]['product_id'] = Product::getPrice($value['sku_code'])->product_id;
+                $products[$key]['product_id'] = $productModel->product_id;
                 $products[$key]['created_at'] = $time;
                 $products[$key]['updated_at'] = $time;
                 $result['products'] = $products;
+            } else {
+                $result['products'][$key]['name'] = $productModel->name;
+                $result['products'][$key]['price'] = $productModel->price;
+                $result['products'][$key]['quantity'] = $value['quantity'];
+                $result['products'][$key]['sub_total'] = $value['quantity'] * $productModel->price;
             }
 
             // Calculate sub_total to be added to total_before_coupontrfgb

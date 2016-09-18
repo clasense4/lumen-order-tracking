@@ -57,14 +57,18 @@ class Order extends Model
         $message = 'Order Failed.';
 
         // Calculate product to get subtotal (before coupon)
+        $summaryProduct = Product::calculate($data['products']);
         $totalBeforeCoupon = Product::calculate($data['products'], $order_id, $time);
         $data['products'] = $totalBeforeCoupon['products'];
 
         // Check if in this order is using coupon
         if ($coupon) {
             $data += Coupon::calculate($coupon, $totalBeforeCoupon['sub_total']);
+            $summaryProduct += Coupon::calculate($coupon, $totalBeforeCoupon['sub_total']);
         } else {
             $data['total'] = $totalBeforeCoupon['sub_total'];
+            $summaryProduct['total'] = $summaryProduct['sub_total'];
+            unset($summaryProduct['sub_total']);
         }
 
         try {
@@ -136,6 +140,6 @@ class Order extends Model
             $message = "Order success.";
         }
 
-        return ['status' => true, 'message' => $message];
+        return ['status' => true, 'message' => $message, 'data' => $summaryProduct];
     }
 }

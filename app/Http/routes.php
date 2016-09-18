@@ -28,4 +28,5 @@ $app->group(['prefix' => 'coupon'], function () use ($app) {
 $app->group(['prefix' => 'order'], function () use ($app) {
     $app->get('all', 'App\Http\Controllers\OrderController@all');
     $app->post('create', 'App\Http\Controllers\OrderController@create');
+    $app->post('calculate', 'App\Http\Controllers\OrderController@calculate');
 });

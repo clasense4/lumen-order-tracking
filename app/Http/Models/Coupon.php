@@ -64,18 +64,20 @@ class Coupon extends Model
         }
     }
 
-    public static function calculate($coupon, $sub_total)
+    public static function calculate($coupon_code, $sub_total)
     {
         // Get Coupon value
-        $couponOrder = self::getCouponData($coupon);
+        $couponOrder = self::getCouponData($coupon_code);
         // Deduction all sub_total with coupon value
         if ($couponOrder['type'] == 1) {
             // Percentage
             $data['total'] = ($sub_total * (100 - $couponOrder['value'])) / 100;
+            $data['coupon_code'] = $coupon_code;
             $data['coupon_value'] = ($sub_total * ($couponOrder['value'])) / 100;
         } elseif ($couponOrder['type'] == 2) {
             // Amount
             $data['total'] = $sub_total - $couponOrder['value'];
+            $data['coupon_code'] = $coupon_code;
             $data['coupon_value'] = $couponOrder['value'];
         }
 
