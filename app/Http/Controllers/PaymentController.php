@@ -70,7 +70,9 @@ class PaymentController extends Controller
         }
 
         // Order code not found
-        $order = Order::where('order_code', $order_code)->select(['total', 'order_code', 'shipping_code', 'updated_at as last_update'])->first();
+        $order = \DB::table('order')
+            ->select(['total', 'order_code', 'shipping_code', 'updated_at as last_update', \DB::raw('(select description from order_status where order_status.order_id = "order".order_id order by updated_at desc limit 1)')])
+            ->where('order_code', $order_code)->first();
         if (!is_object($order)) {
             return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code ot found'));
         }
