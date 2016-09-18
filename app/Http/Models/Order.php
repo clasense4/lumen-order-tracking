@@ -6,7 +6,6 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Uuid\Uuid;
-use App\Http\Models\OrderProduct;
 use Carbon\Carbon;
 
 class Order extends Model
@@ -136,6 +135,16 @@ class Order extends Model
                     $message = "Coupon out of stock.";
                 }
             }
+
+            // Add to order status with status `1`, description `waiting for payment
+            OrderStatus::create([
+                'order_status_id' => Uuid::uuid4(),
+                'order_id' => $order_id,
+                'status' => 1,
+                'description' => 'Waiting for payment',
+                'created_at' => $time,
+                'updated_at' => $time,
+            ]);
         } catch (Exception $e) {
             $error = true;
         }
