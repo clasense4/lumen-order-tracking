@@ -56,48 +56,29 @@ class Order extends Model
         $coupon = (!empty($data['coupon_code'])? $data['coupon_code'] : false);
         $message = 'Order Failed.';
 
-        // Save Order Detail, embed sub_total and
-        foreach ($data['products'] as $key => $value) {
-            $data['products'][$key]['order_detail_id'] = Uuid::uuid4();
-            $data['products'][$key]['order_id'] = $order_id;
-            $data['products'][$key]['product_id'] = Product::getPrice($value['sku_code'])->product_id;
-            $data['products'][$key]['price'] = Product::getPrice($value['sku_code'])->price;
-            $data['products'][$key]['sub_total'] = $value['quantity'] * Product::getPrice($value['sku_code'])->price;
-            $data['products'][$key]['created_at'] = $time;
-            $data['products'][$key]['updated_at'] = $time;
-
-            // Calculate sub_total to be added to total_before_coupon
-            $totalBeforeCoupon += $data['products'][$key]['sub_total'];
-        }
+        // Calculate product to get subtotal (before coupon)
+        $totalBeforeCoupon = Product::calculate($data['products'], $order_id, $time);
+        $data['products'] = $totalBeforeCoupon['products'];
 
         // Check if in this order is using coupon
         if ($coupon) {
-            // Get Coupon value
-            $couponOrder = Coupon::getCouponData($coupon);
-            // Deduction with using coupon, still hardcode
-            if ($couponOrder['type'] == 1) {
-                // Percentage
-                $data['total'] = ($totalBeforeCoupon * (100 - $couponOrder['value'])) / 100;
-                $data['coupon_value'] = ($totalBeforeCoupon * ($couponOrder['value'])) / 100;
-            } elseif ($couponOrder['type'] == 2) {
-                // Amount
-                $data['total'] = $totalBeforeCoupon - $couponOrder['value'];
-                $data['coupon_value'] = $couponOrder['value'];
-            }
+            $data += Coupon::calculate($coupon, $totalBeforeCoupon['sub_total']);
         } else {
-            $data['total'] = $totalBeforeCoupon;
+            $data['total'] = $totalBeforeCoupon['sub_total'];
         }
 
         try {
             // I'll leave here to test failed transaction
             // sleep(10);
 
-            // Save Customer info
-            $username = sha1($data['customer']['name'].$data['customer']['email']);
+            // Convert an email into a username, so when same email come, it didn't create a new one
+            $username = sha1($data['customer']['email']);
+
             // If new username
             if (User::exist($username)) {
                 $user_id = User::where('username', $username)->first()->user_id;
             } else {
+                // Save Customer info
                 $user_id = Uuid::uuid4();
                 $data['customer']['user_id'] = $user_id;
                 $data['customer']['user_type'] = 2;
@@ -112,7 +93,7 @@ class Order extends Model
             // Save Order
             $data['order_id'] = $order_id;
             $data['user_id'] = $user_id;
-            $data['total_before_coupon'] = $totalBeforeCoupon;
+            $data['total_before_coupon'] = $totalBeforeCoupon['sub_total'];
             $order = Order::create($data);
 
             // Deducting Quantity of product

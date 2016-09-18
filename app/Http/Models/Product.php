@@ -44,4 +44,32 @@ class Product extends Model
     {
         return self::where('sku_code',$sku_code)->firstOrFail();
     }
+
+    public static function calculate(Array $products, $order_id = false, $time = false)
+    {
+        $sub_total = 0;
+        $result = [];
+
+        foreach ($products as $key => $value) {
+            $products[$key]['price'] = Product::getPrice($value['sku_code'])->price;
+            $products[$key]['sub_total'] = $value['quantity'] * Product::getPrice($value['sku_code'])->price;
+
+            // if order id given add to array
+            if (($order_id) && ($time)) {
+                $products[$key]['order_detail_id'] = Uuid::uuid4();
+                $products[$key]['order_id'] = $order_id;
+                $products[$key]['product_id'] = Product::getPrice($value['sku_code'])->product_id;
+                $products[$key]['created_at'] = $time;
+                $products[$key]['updated_at'] = $time;
+                $result['products'] = $products;
+            }
+
+            // Calculate sub_total to be added to total_before_coupontrfgb
+            $sub_total += $products[$key]['sub_total'];
+        }
+
+        $result['sub_total'] = $sub_total;
+
+        return $result;
+    }
 }
