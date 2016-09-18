@@ -30,3 +30,9 @@ $app->group(['prefix' => 'order'], function () use ($app) {
     $app->post('create', 'App\Http\Controllers\OrderController@create');
     $app->post('calculate', 'App\Http\Controllers\OrderController@calculate');
 });
+
+$app->group(['prefix' => 'payment'], function () use ($app) {
+    $app->post('{order_code}', 'App\Http\Controllers\PaymentController@proof');
+    $app->get('detail/{order_code}', 'App\Http\Controllers\PaymentController@detail');
+    $app->get('view/{order_code}', 'App\Http\Controllers\PaymentController@viewFile');
+});

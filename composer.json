@@ -10,7 +10,8 @@
         "vlucas/phpdotenv": "~2.2",
         "ramsey/uuid": "*",
         "illuminate/routing": "^5.2",
-        "nesbot/carbon": "^1.21"
+        "nesbot/carbon": "^1.21",
+        "league/flysystem": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
