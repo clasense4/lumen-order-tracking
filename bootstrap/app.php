@@ -74,6 +74,11 @@ $app->singleton('filesystem', function ($app) {
 |
 */
 
+$app->routeMiddleware([
+    'cors' => App\Http\Middleware\CorsMiddleware::class,
+    'token' => App\Http\Middleware\TokenMiddleware::class,
+]);
+
 // $app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);

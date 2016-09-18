@@ -36,3 +36,8 @@ $app->group(['prefix' => 'payment'], function () use ($app) {
     $app->get('detail/{order_code}', 'App\Http\Controllers\PaymentController@detail');
     $app->get('view/{order_code}', 'App\Http\Controllers\PaymentController@viewFile');
 });
+
+$app->group(['middleware' => ['token']], function ($app) {
+    $app->post('payment/admin/confirmation', 'App\Http\Controllers\PaymentController@confirmation');
+    $app->post('payment/admin/shipping_code', 'App\Http\Controllers\PaymentController@shippingCode');
+});

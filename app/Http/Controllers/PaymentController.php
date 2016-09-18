@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -112,5 +113,64 @@ class PaymentController extends Controller
             'Content-Type' => Storage::mimeType($payment_file),
             'Content-Disposition' => 'inline; '.$payment_file,
         ]);
+    }
+
+    public function confirmation(Request $request)
+    {
+        // check if input valid or invalid
+        $postJSON = $request->json()->all();
+        $v = \Validator::make($postJSON, ['order_code' => 'required']);
+
+        if ($v->fails()) {
+            return response()->json(ResponseHelpers::returnJson(Response::HTTP_BAD_REQUEST, $v->errors()->all()));
+        }
+
+        // Update table order, update valid_date and valid_by
+        $order = Order::where('order_code', $postJSON['order_code'])->first();
+        $order->valid_by = 1;
+        $order->valid_at = Carbon::now();
+        $order->save();
+
+        // Add to order status with status `3`, description `Payment confirmed, waiting for Shipping Code`
+        $message = 'Payment confirmed, waiting for Shipping Code';
+        OrderStatus::create([
+            'order_status_id' => Uuid::uuid4(),
+            'order_id' => $order->order_id,
+            'status' => 3,
+            'description' => $message,
+            'created_at' => time(),
+            'updated_at' => time(),
+        ]);
+
+        return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $message));
+    }
+
+    public function shippingCode(Request $request)
+    {
+        // check if input valid or invalid
+        $postJSON = $request->json()->all();
+        $v = \Validator::make($postJSON, ['order_code' => 'required', 'shipping_code' => 'required']);
+
+        if ($v->fails()) {
+            return response()->json(ResponseHelpers::returnJson(Response::HTTP_BAD_REQUEST, $v->errors()->all()));
+        }
+
+        // Update table order, update valid_date and valid_by
+        $order = Order::where('order_code', $postJSON['order_code'])->first();
+        $order->shipping_code = $postJSON['shipping_code'];
+        $order->save();
+
+        // Add to order status with status `4`, description `Shipping Code {shipping_code}, Thank You.`
+        $message = 'Shipping Code '.$order->shipping_code.', Thank You.';
+        OrderStatus::create([
+            'order_status_id' => Uuid::uuid4(),
+            'order_id' => $order->order_id,
+            'status' => 4,
+            'description' => $message,
+            'created_at' => time(),
+            'updated_at' => time(),
+        ]);
+
+        return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $message));
     }
 }
