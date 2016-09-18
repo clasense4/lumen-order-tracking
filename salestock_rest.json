@@ -1,11 +1,11 @@
 {
   "_type": "export",
   "__export_format": 2,
-  "__export_date": "2016-09-17T15:42:13.500Z",
+  "__export_date": "2016-09-18T09:36:06.356Z",
   "__export_source": "insomnia.desktop.app:v3.4.1",
   "resources": [
     {
-      "modified": 1474126517594,
+      "modified": 1474191330006,
       "created": 1474073091072,
       "parentId": null,
       "name": "SaleStock",
@@ -26,7 +26,7 @@
     {
       "name": "Default Jar",
       "cookies": [],
-      "modified": 1474126804597,
+      "modified": 1474191333638,
       "created": 1474073212737,
       "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
       "_id": "jar_it6h4qblZ9Ncet2v2rH69",
@@ -86,7 +86,7 @@
       "url": "{{ base_url }}/product/create",
       "name": "Create",
       "method": "POST",
-      "body": "{\n\t\"product_type_id\" : \"1\",\n\t\"name\" : \"Xiaomi Redmi 1S\",\n\t\"description\" : \"Entry level xiaomi\",\n\t\"price\" : 1500000,\n\t\"quantity\":1\n}",
+      "body": "{\n\t\"product_type_id\" : \"1\",\n\t\"name\" : \"Xiaomi Redmi 1S\",\n\t\"sku_code\" : \"XMR1S\",\n\t\"description\" : \"Entry level xiaomi\",\n\t\"price\" : 1500000,\n\t\"quantity\":1\n}",
       "parameters": [],
       "headers": [
         {
@@ -95,7 +95,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474095255647,
+      "modified": 1474130271605,
       "created": 1474079390835,
       "parentId": "fld_it6mj6l8nJB8TECRagGsQ6Zy",
       "_id": "req_it6kt5df88yEguWaGrQ7nPJG",
@@ -166,7 +166,7 @@
       "url": "{{ base_url }}/order/create",
       "name": "Create without Coupon",
       "method": "POST",
-      "body": "{\n\t\"user_id\" : \"1\",\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\" : \"77e42794-5816-47ea-a8df-95f4fbc3158c\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"43825c86-945c-46c5-b4b1-3544bf8b16bf\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t]\n}",
+      "body": "{\n\t\"customer\" : {\n\t\t\"name\" : \"Fajri Abdillah\",\n\t\t\"phone_number\" : \"081224507359\",\n\t\t\"email\" : \"clasense4@gmail.com\",\n\t\t\"address\" : \"Jln. Sarimanis 1 XV / 26, Bandung 40151\"\n\t},\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t]\n}",
       "parameters": [],
       "headers": [
         {
@@ -175,7 +175,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474111945198,
+      "modified": 1474129649151,
       "created": 1474096232402,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it6uu4eqsXJByWYtqtCvX6Vu",
@@ -185,7 +185,7 @@
       "url": "{{ base_url }}/order/create",
       "name": "Create (Coupon Percentage)",
       "method": "POST",
-      "body": "{\n\t\"user_id\" : \"1\",\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\" : \"77e42794-5816-47ea-a8df-95f4fbc3158c\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"43825c86-945c-46c5-b4b1-3544bf8b16bf\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t\n\t],\n\t\"coupon_code\" : \"ss50\"\n}",
+      "body": "{\n\t\"customer\" : {\n\t\t\"name\" : \"Fajri Abdillah\",\n\t\t\"phone_number\" : \"081224507359\",\n\t\t\"email\" : \"clasense4@gmail.com\",\n\t\t\"address\" : \"Jln. Sarimanis 1 XV / 26, Bandung 40151\"\n\t},\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss50\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -194,7 +194,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474111275338,
+      "modified": 1474129637745,
       "created": 1474097956636,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it6vv2u43v4ekaPuvASjGJHP",
@@ -204,7 +204,7 @@
       "url": "{{ base_url }}/order/create",
       "name": "Create (Coupon Amount)",
       "method": "POST",
-      "body": "{\n\t\"user_id\" : \"1\",\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\" : \"77e42794-5816-47ea-a8df-95f4fbc3158c\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"43825c86-945c-46c5-b4b1-3544bf8b16bf\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss75\"\n}",
+      "body": "{\n\t\"customer\" : {\n\t\t\"name\" : \"Fajri Abdillah\",\n\t\t\"phone_number\" : \"081224507359\",\n\t\t\"email\" : \"clasense4@gmail.com\",\n\t\t\"address\" : \"Jln. Sarimanis 1 XV / 26, Bandung 40151\"\n\t},\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss75\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -213,7 +213,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474109867144,
+      "modified": 1474128283975,
       "created": 1474108238776,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it71zgl48r7H6b2qvj2hCW2F",
@@ -223,7 +223,7 @@
       "url": "{{ base_url }}/order/create",
       "name": "Create (Coupon Expired)",
       "method": "POST",
-      "body": "{\n\t\"user_id\" : \"1\",\n\t\"products\" : [\n\t\t{\n\t\t\t\"product_id\" : \"77e42794-5816-47ea-a8df-95f4fbc3158c\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\" : \"43825c86-945c-46c5-b4b1-3544bf8b16bf\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss95\"\n}",
+      "body": "{\n\t\"customer\" : {\n\t\t\"name\" : \"Fajri Abdillah\",\n\t\t\"phone_number\" : \"081224507359\",\n\t\t\"email\" : \"clasense4@gmail.com\",\n\t\t\"address\" : \"Jln. Sarimanis 1 XV / 26, Bandung 40151\"\n\t},\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss95\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -232,10 +232,67 @@
         }
       ],
       "authentication": {},
-      "modified": 1474126523455,
+      "modified": 1474128254342,
       "created": 1474126491720,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it7cuoncaXPNEfQQRRsYEX3t",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/order/calculate",
+      "name": "Calculate without Coupon",
+      "method": "POST",
+      "body": "{\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 2\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 2\n\t\t}\n\t]\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474185238498,
+      "created": 1474183670032,
+      "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
+      "_id": "req_it8aw7ptfjG3hZk7wSYcv6jj",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/order/calculate",
+      "name": "Calculate with Coupon Discount",
+      "method": "POST",
+      "body": "{\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss50\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474185223066,
+      "created": 1474184329118,
+      "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
+      "_id": "req_it8bac9qBr7MAddE58DrYQrG",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/order/calculate",
+      "name": "Calculate with Coupon Amount",
+      "method": "POST",
+      "body": "{\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 2\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 2\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss75\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474190545207,
+      "created": 1474185227530,
+      "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
+      "_id": "req_it8btlhmdHkvv9TPh6NBgfes",
       "_type": "request"
     }
   ]
