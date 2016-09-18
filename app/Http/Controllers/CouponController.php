@@ -24,7 +24,7 @@ class CouponController extends Controller
     public function all(Request $request)
     {
         $coupons = Coupon::all();
-        return response()->json(ResponseHelpers::returnJsonData(Response::HTTP_OK, $coupons, ''));
+        return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, '', $coupons));
     }
 
     public function create(Request $request)

@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function all(Request $request)
     {
         $products = Product::all();
-        return response()->json(ResponseHelpers::returnJsonData(Response::HTTP_OK, $products, ''));
+        return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $products, ''));
     }
 
     public function create(Request $request)
