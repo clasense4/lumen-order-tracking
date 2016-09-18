@@ -39,7 +39,15 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'order_id','user_id','coupon_code','coupon_value','total','total_before_coupon','valid_by','valid_at'
+        'order_id',
+        'user_id',
+        'coupon_code',
+        'coupon_value',
+        'total',
+        'total_before_coupon',
+        'valid_by',
+        'valid_at',
+        'order_code'
     ];
 
     public static function newOrder($data)
@@ -96,6 +104,9 @@ class Order extends Model
 
             // Save Order
             $data['order_id'] = $order_id;
+            $data['order_code'] = str_random(6);
+            // Add to summary
+            $summaryProduct['order_code'] = $data['order_code'];
             $data['user_id'] = $user_id;
             $data['total_before_coupon'] = $totalBeforeCoupon['sub_total'];
             $order = Order::create($data);
@@ -137,7 +148,7 @@ class Order extends Model
         } else {
             // commit the transactions
             DB::commit();
-            $message = "Order success.";
+            $message = "Order success. Please paid ".$summaryProduct['total']." and upload payment proof to this URL " . env('BASE_URL') . "payment/" . $summaryProduct['order_code'];
         }
 
         return ['status' => true, 'message' => $message, 'data' => $summaryProduct];
