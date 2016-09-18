@@ -4,25 +4,18 @@ namespace App\Helpers;
 
 class ResponseHelpers
 {
-    public static function returnJson($status, $message)
+    public static function returnJson($status, $message = null, $data = null)
     {
-        $res = [
-            "status" => $status,
-            "message" => $message
-        ];
+        $res['status'] = $status;
+        if (!empty($data)) {
+            $res['data'] = $data;
+        }
+        if (!empty($message)) {
+            $res['message'] = $message;
+        }
+
         return $res;
     }
-
-    public static function returnJsonData($status, $data, $msg)
-    {
-        $res = [
-            "status" => $status,
-            "data" => $data,
-            "message" => $msg
-        ];
-        return $res;
-    }
-
 }
 
 ?>
