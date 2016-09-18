@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Order;
+use App\Http\Models\OrderStatus;
 use App\Helpers\ResponseHelpers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 class PaymentController extends Controller
 {
@@ -59,6 +61,16 @@ class PaymentController extends Controller
         $order->payment_file = $filename;
         $order->save();
 
+        // Add to order status with status `2`, description `Payment Uploaded, waiting confirmation from administrator`
+        OrderStatus::create([
+            'order_status_id' => Uuid::uuid4(),
+            'order_id' => $order->order_id,
+            'status' => 2,
+            'description' => 'Payment Uploaded, waiting confirmation from administrator',
+            'created_at' => time(),
+            'updated_at' => time(),
+        ]);
+
         return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Payment Uploaded, please follow URL '. env('BASE_URL') .'payment/detail/'.$order_code.' to get shipping code and another updates.'));
     }
 
@@ -71,7 +83,7 @@ class PaymentController extends Controller
 
         // Order code not found
         $order = \DB::table('order')
-            ->select(['total', 'order_code', 'shipping_code', 'updated_at as last_update', \DB::raw('(select description from order_status where order_status.order_id = "order".order_id order by updated_at desc limit 1)')])
+            ->select(['total', 'order_code', 'shipping_code', 'updated_at as last_update', \DB::raw('(select description as status from order_status where order_status.order_id = "order".order_id order by updated_at desc limit 1)')])
             ->where('order_code', $order_code)->first();
         if (!is_object($order)) {
             return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code ot found'));
