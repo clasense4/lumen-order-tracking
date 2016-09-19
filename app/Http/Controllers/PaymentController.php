@@ -28,8 +28,15 @@ class PaymentController extends Controller
 
     public function all(Request $request)
     {
-        // $orders = Order::all();
-        // return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, '', $orders));
+        $orders = Order::select('order_code','total','valid_at','valid_by','shipping_code','payment_file','shipped','user_id','order_id')
+        ->with(['user' => function($query) {
+            $query->select('user_id','name','email','phone_number','address');
+        }])
+        ->with(['status' => function($query) {
+            $query->select('order_id','description');
+        }])->get();
+
+        return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, '', $orders));
     }
 
     public function proof(Request $request, $order_code)

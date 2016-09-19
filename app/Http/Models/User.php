@@ -25,6 +25,14 @@ class User extends Model
         'user_id','user_type','name','username','email','password','phone_number','address'
     ];
 
+    /**
+     * Relationship to order
+     */
+    public function orders()
+    {
+        return $this->hasMany('\App\Http\Models\Order','order.user_id','user.user_id');
+    }
+
     public static function exist($username)
     {
         $model = self::where(

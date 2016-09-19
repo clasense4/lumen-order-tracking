@@ -33,6 +33,22 @@ class Order extends Model
     ];
 
     /**
+     * Relationship to status
+     */
+    public function status()
+    {
+        return $this->hasMany('App\Http\Models\OrderStatus', 'order_id', 'order_id');
+    }
+
+    /**
+     * Relationship to user
+     */
+    public function user()
+    {
+        return $this->hasOne('App\Http\Models\User','user_id','user_id');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
