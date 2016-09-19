@@ -1,11 +1,11 @@
 {
   "_type": "export",
   "__export_format": 2,
-  "__export_date": "2016-09-19T08:59:50.018Z",
+  "__export_date": "2016-09-19T15:12:58.842Z",
   "__export_source": "insomnia.desktop.app:v3.4.1",
   "resources": [
     {
-      "modified": 1474275086779,
+      "modified": 1474297951967,
       "created": 1474073091072,
       "parentId": null,
       "name": "SaleStock",
@@ -26,7 +26,7 @@
     {
       "name": "Default Jar",
       "cookies": [],
-      "modified": 1474275130686,
+      "modified": 1474297954149,
       "created": 1474073212737,
       "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
       "_id": "jar_it6h4qblZ9Ncet2v2rH69",
@@ -115,7 +115,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474271858600,
+      "modified": 1474292855507,
       "created": 1474079390835,
       "parentId": "fld_it6mj6l8nJB8TECRagGsQ6Zy",
       "_id": "req_it6kt5df88yEguWaGrQ7nPJG",
@@ -162,7 +162,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474091778187,
+      "modified": 1474293240943,
       "created": 1474082597684,
       "parentId": "fld_it6mpmpbXxEhQmUPDK9gdn5U",
       "_id": "req_it6mpvskQW8UpBZ8hCskTRYY",
@@ -195,7 +195,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474129649151,
+      "modified": 1474293942756,
       "created": 1474096232402,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it6uu4eqsXJByWYtqtCvX6Vu",
@@ -221,7 +221,7 @@
         "username": "",
         "password": ""
       },
-      "modified": 1474211131738,
+      "modified": 1474294164241,
       "created": 1474097956636,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it6vv2u43v4ekaPuvASjGJHP",
@@ -240,7 +240,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474128283975,
+      "modified": 1474294102971,
       "created": 1474108238776,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it71zgl48r7H6b2qvj2hCW2F",
@@ -259,7 +259,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474211394017,
+      "modified": 1474294244479,
       "created": 1474126491720,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it7cuoncaXPNEfQQRRsYEX3t",
@@ -269,7 +269,7 @@
       "url": "{{ base_url }}/order/calculate",
       "name": "Calculate without Coupon",
       "method": "POST",
-      "body": "{\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 2\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 2\n\t\t}\n\t]\n}",
+      "body": "{\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 2\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 9\n\t\t}\n\t]\n}",
       "parameters": [],
       "headers": [
         {
@@ -278,7 +278,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474185238498,
+      "modified": 1474293479931,
       "created": 1474183670032,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it8aw7ptfjG3hZk7wSYcv6jj",
@@ -286,7 +286,7 @@
     },
     {
       "url": "{{ base_url }}/order/calculate",
-      "name": "Calculate with Coupon Discount",
+      "name": "Calculate with Coupon Percentage",
       "method": "POST",
       "body": "{\n\t\"products\" : [\n\t\t{\n\t\t\t\"sku_code\" : \"XMR1S\",\n\t\t\t\"quantity\" : 1\n\t\t},\n\t\t{\n\t\t\t\"sku_code\" : \"XMR2\",\n\t\t\t\"quantity\" : 1\n\t\t}\n\t],\n\t\"coupon_code\" : \"ss50\"\n}",
       "parameters": [],
@@ -297,7 +297,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474185223066,
+      "modified": 1474293674290,
       "created": 1474184329118,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it8bac9qBr7MAddE58DrYQrG",
@@ -316,7 +316,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474267756185,
+      "modified": 1474293589327,
       "created": 1474185227530,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it8btlhmdHkvv9TPh6NBgfes",
@@ -326,7 +326,7 @@
       "url": "{{ base_url }}/payment/admin/confirmation",
       "name": "Admin Confirm Order",
       "method": "POST",
-      "body": "{\n\t\"order_code\":\"Ocs3Bc\"\n}",
+      "body": "{\n\t\"order_code\":\"Ocs3Bcs\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -339,7 +339,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474274125522,
+      "modified": 1474296425874,
       "created": 1474224686667,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it8zbccrgtW3paRaMmMU9EHB",
@@ -349,7 +349,7 @@
       "url": "{{ base_url }}/payment/admin/shipping_code",
       "name": "Admin Add Shipping Code",
       "method": "POST",
-      "body": "{\n\t\"order_code\":\"Ocs3Bc\",\n\t\"shipping_code\" : \"354313\"\n}",
+      "body": "{\n\t\"order_code\":\"hKL8Mq\",\n\t\"shipping_code\" : \"354313\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -362,21 +362,21 @@
         }
       ],
       "authentication": {},
-      "modified": 1474274377875,
+      "modified": 1474297643773,
       "created": 1474225737258,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it8zxuzu5Sf8XugWxzJpUuqG",
       "_type": "request"
     },
     {
-      "url": "{{ base_url }}/payment/detail/ZdCpLn",
+      "url": "{{ base_url }}/payment/detail/hKL8M",
       "name": "Customer Detail Order",
       "method": "GET",
       "body": "",
       "parameters": [],
       "headers": [],
       "authentication": {},
-      "modified": 1474271782830,
+      "modified": 1474296137099,
       "created": 1474255933597,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it9hx2n1QZs6TKwNPuj5ZU9z",
@@ -384,7 +384,7 @@
     },
     {
       "url": "{{ base_url }}/payment/admin/view_proof",
-      "name": "Admin View Payment Proof",
+      "name": "Admin View List Payment Proof",
       "method": "POST",
       "body": "",
       "parameters": [],
@@ -399,7 +399,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474271164448,
+      "modified": 1474296766526,
       "created": 1474256009178,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it9hyoyiUgZpj3ZDkJmZFtNB",
@@ -418,7 +418,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474270950930,
+      "modified": 1474296310416,
       "created": 1474260119542,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it9kesjaCmCa9AseW7e6CpYt",
@@ -428,7 +428,7 @@
       "url": "{{ base_url }}/payment/admin/cancel",
       "name": "Admin Cancel Order",
       "method": "POST",
-      "body": "{\n\t\"order_code\":\"4JQduc\"\n}",
+      "body": "{\n\t\"order_code\":\"hKL8q\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -441,7 +441,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474265003768,
+      "modified": 1474297295276,
       "created": 1474263925708,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it9mode4T486X3KMDqADmjfT",
@@ -455,7 +455,7 @@
       "parameters": [],
       "headers": [],
       "authentication": {},
-      "modified": 1474274520279,
+      "modified": 1474297943158,
       "created": 1474271693798,
       "parentId": "fld_it9ragsrXYfYFHXEeWfH8Tg6",
       "_id": "req_it9ravaevhWpA66C58CWc9HH",
@@ -482,7 +482,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474275049053,
+      "modified": 1474297931485,
       "created": 1474271758788,
       "parentId": "fld_it9ragsrXYfYFHXEeWfH8Tg6",
       "_id": "req_it9rc9fojqyXZX79KyYdBxxg",
