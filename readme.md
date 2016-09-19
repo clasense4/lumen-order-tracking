@@ -52,8 +52,12 @@ cd /var/www/lumen-order-tracking
 vendor/bin/phpunit
 ```
 
+## Insomnia file
+
+I have included [Insomnia Rest](https://insomnia.rest) file to get start with this projects. Import `salestock.rest`. [Read more](https://insomnia.rest/documentation/).
+
 ## Troubleshooting
 
 ### Error in `composer install`
 
-Well, it must be cache problem, try to install it with `composer install -vvv --profile --prefer-source`, or try `composer update`.
+Well, it must be cache problem, try to install it with `composer install -vvv --profile --prefer-source`.
