@@ -1,11 +1,11 @@
 {
   "_type": "export",
   "__export_format": 2,
-  "__export_date": "2016-09-18T19:13:16.899Z",
+  "__export_date": "2016-09-19T06:55:27.413Z",
   "__export_source": "insomnia.desktop.app:v3.4.1",
   "resources": [
     {
-      "modified": 1474225747536,
+      "modified": 1474268111974,
       "created": 1474073091072,
       "parentId": null,
       "name": "SaleStock",
@@ -26,7 +26,7 @@
     {
       "name": "Default Jar",
       "cookies": [],
-      "modified": 1474225804899,
+      "modified": 1474267769903,
       "created": 1474073212737,
       "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
       "_id": "jar_it6h4qblZ9Ncet2v2rH69",
@@ -83,9 +83,11 @@
       "_type": "request"
     },
     {
-      "name": "New Environment",
-      "data": {},
-      "modified": 1474073149367,
+      "name": "Cls Production",
+      "data": {
+        "base_url": "http://188.166.188.17"
+      },
+      "modified": 1474268118610,
       "created": 1474073149367,
       "parentId": "env_it6h27biHZDpHfNCZY7a6",
       "_id": "env_it6h3dfbR7KzSDaqZCw7E",
@@ -305,7 +307,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474190545207,
+      "modified": 1474267756185,
       "created": 1474185227530,
       "parentId": "fld_it6ucnrnC3yrVuAHejP5j9tR",
       "_id": "req_it8btlhmdHkvv9TPh6NBgfes",
@@ -313,9 +315,9 @@
     },
     {
       "url": "{{ base_url }}/payment/admin/confirmation",
-      "name": "Admin Confirmation",
+      "name": "Admin Confirm Order",
       "method": "POST",
-      "body": "{\n\t\"order_code\":\"BoZF9p\"\n}",
+      "body": "{\n\t\"order_code\":\"MXfcee\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -328,7 +330,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474225356136,
+      "modified": 1474263939477,
       "created": 1474224686667,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it8zbccrgtW3paRaMmMU9EHB",
@@ -338,7 +340,7 @@
       "url": "{{ base_url }}/payment/admin/shipping_code",
       "name": "Admin Add Shipping Code",
       "method": "POST",
-      "body": "{\n\t\"order_code\":\"BoZF9p\",\n\t\"shipping_code\" : \"354313\"\n}",
+      "body": "{\n\t\"order_code\":\"MXfcee\",\n\t\"shipping_code\" : \"354313\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -351,10 +353,93 @@
         }
       ],
       "authentication": {},
-      "modified": 1474225772834,
+      "modified": 1474255871558,
       "created": 1474225737258,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it8zxuzu5Sf8XugWxzJpUuqG",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/payment/detail/ZdCpLn",
+      "name": "Detail Order for Customer",
+      "method": "GET",
+      "body": "",
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "modified": 1474267355430,
+      "created": 1474255933597,
+      "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
+      "_id": "req_it9hx2n1QZs6TKwNPuj5ZU9z",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/payment/admin/view_proof",
+      "name": "Admin View Payment Proof",
+      "method": "POST",
+      "body": "{\n\t\"order_code\":\"ZdCpLn\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "token",
+          "value": "313354"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474267373771,
+      "created": 1474256009178,
+      "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
+      "_id": "req_it9hyoyiUgZpj3ZDkJmZFtNB",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/payment/admin/all_order",
+      "name": "Admin View All Orders",
+      "method": "GET",
+      "body": "{\n\t\"order_code\":\"MXfcee\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "token",
+          "value": "313354"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474260145212,
+      "created": 1474260119542,
+      "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
+      "_id": "req_it9kesjaCmCa9AseW7e6CpYt",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/payment/admin/cancel",
+      "name": "Admin Cancel Order",
+      "method": "POST",
+      "body": "{\n\t\"order_code\":\"4JQduc\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "token",
+          "value": "313354"
+        }
+      ],
+      "authentication": {},
+      "modified": 1474265003768,
+      "created": 1474263925708,
+      "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
+      "_id": "req_it9mode4T486X3KMDqADmjfT",
       "_type": "request"
     }
   ]
