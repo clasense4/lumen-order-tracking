@@ -901,14 +901,541 @@ None
 
 ## 4. Payment
 
-### 4.1. All
+### 4.1. Customer Upload Payment Proof
 
 #### *Description*
 
+Customer need to upload the payment proof, including valid order_code. If valid code not found, it will give not found. Note : this request is not include in Insomnia.
+
 #### *Example Success Request*
+```
+curl -X POST -H "Content-Type: multipart/form-data" \
+  -F "photo=@/D:\Projects\localhost\private\lumen52\PbPYzVD.jpg" \
+  "http://127.0.0.1:8080/payment/proof/hKL8Mq"
+```
+
+#### *Success Response*
+```
+{
+  "status": 200,
+  "message": "Payment Uploaded, please follow URL http://127.0.0.1:8080/payment/detail/hKL8Mq to get shipping code and another updates."
+}
+```
+
+#### *Example Error Request*
+```
+curl -X POST -H "Content-Type: multipart/form-data" \
+  -F "photo=@/D:\Projects\localhost\private\lumen52\PbPYzVD.jpg" \
+  "http://127.0.0.1:8080/payment/proof/hKL8M"
+```
+
+#### *Error Response*
+```
+{
+  "status": 200,
+  "message": "Order code not found"
+}
+```
+
+
+### 4.2. Customer Detail Order
+
+#### *Description*
+
+Customer can check the status of their order_code.
+
+#### *Example Success Request*
+```
+curl --request GET \
+  --url http://127.0.0.1:8080/payment/detail/hKL8Mq
+```
+
+#### *Success Response*
+```
+{
+    "status": 200,
+    "data": {
+        "total": 3100000,
+        "order_code": "hKL8Mq",
+        "shipping_code": null,
+        "last_update": "2016-09-19 14:38:42",
+        "status": "Payment Uploaded, waiting confirmation from administrator"
+    }
+}
+```
+
+#### *Example Error Request*
+```
+curl --request GET \
+  --url http://127.0.0.1:8080/payment/detail/hKL8M
+```
+
+#### *Error Response*
+```
+{
+    "status": 200,
+    "message": "Order code not found"
+}
+```
+
+
+### 4.3. Admin View All Order
+
+#### *Description*
+
+Admin can view all order, including order status, and customer detail. This route is protected with `token`. The `token` is still hardcode, related with `.env` file.
+
+#### *Example Success Request*
+```
+curl --request GET \
+  --url http://127.0.0.1:8080/payment/admin/all_order \
+  --header 'token: 313354'
+```
+
+#### *Success Response*
+```
+{
+    "status": 200,
+    "data": [
+        {
+            "order_code": "L1bQhd",
+            "total": 3100000,
+            "valid_at": null,
+            "valid_by": null,
+            "shipping_code": null,
+            "payment_file": null,
+            "shipped": null,
+            "user_id": "3d15fc34-b99a-4592-a782-b36aace7b646",
+            "order_id": "07d8473d-d232-4b2c-91f2-8b4001ebcea4",
+            "user": {
+                "user_id": "3d15fc34-b99a-4592-a782-b36aace7b646",
+                "name": "Fajri Abdillah",
+                "email": "clasense4@gmail.com",
+                "phone_number": "081224507359",
+                "address": "Jln. Sarimanis 1 XV / 26, Bandung 40151"
+            },
+            "status": [
+                {
+                    "order_id": "07d8473d-d232-4b2c-91f2-8b4001ebcea4",
+                    "description": "Waiting for payment"
+                }
+            ]
+        },
+        {
+            "order_code": "qUdO3i",
+            "total": 1550000,
+            "valid_at": null,
+            "valid_by": null,
+            "shipping_code": null,
+            "payment_file": null,
+            "shipped": null,
+            "user_id": "3d15fc34-b99a-4592-a782-b36aace7b646",
+            "order_id": "bd9207ab-5309-406c-a6cb-8a61332458c5",
+            "user": {
+                "user_id": "3d15fc34-b99a-4592-a782-b36aace7b646",
+                "name": "Fajri Abdillah",
+                "email": "clasense4@gmail.com",
+                "phone_number": "081224507359",
+                "address": "Jln. Sarimanis 1 XV / 26, Bandung 40151"
+            },
+            "status": [
+                {
+                    "order_id": "bd9207ab-5309-406c-a6cb-8a61332458c5",
+                    "description": "Waiting for payment"
+                }
+            ]
+        },
+        {
+            "order_code": "JPKhZ0",
+            "total": 1550000,
+            "valid_at": null,
+            "valid_by": null,
+            "shipping_code": null,
+            "payment_file": null,
+            "shipped": null,
+            "user_id": "3d15fc34-b99a-4592-a782-b36aace7b646",
+            "order_id": "ec650937-c6dc-4983-99f8-62c89adcbc4c",
+            "user": {
+                "user_id": "3d15fc34-b99a-4592-a782-b36aace7b646",
+                "name": "Fajri Abdillah",
+                "email": "clasense4@gmail.com",
+                "phone_number": "081224507359",
+                "address": "Jln. Sarimanis 1 XV / 26, Bandung 40151"
+            },
+            "status": [
+                {
+                    "order_id": "ec650937-c6dc-4983-99f8-62c89adcbc4c",
+                    "description": "Waiting for payment"
+                }
+            ]
+        },
+        {
+            "order_code": "hKL8Mq",
+            "total": 3100000,
+            "valid_at": null,
+            "valid_by": null,
+            "shipping_code": null,
+            "payment_file": "524c47a9-6dae-4d71-8991-66d76c46e426_hKL8Mq.jpg",
+            "shipped": null,
+            "user_id": "3d15fc34-b99a-4592-a782-b36aace7b646",
+            "order_id": "524c47a9-6dae-4d71-8991-66d76c46e426",
+            "user": {
+                "user_id": "3d15fc34-b99a-4592-a782-b36aace7b646",
+                "name": "Fajri Abdillah",
+                "email": "clasense4@gmail.com",
+                "phone_number": "081224507359",
+                "address": "Jln. Sarimanis 1 XV / 26, Bandung 40151"
+            },
+            "status": [
+                {
+                    "order_id": "524c47a9-6dae-4d71-8991-66d76c46e426",
+                    "description": "Waiting for payment"
+                },
+                {
+                    "order_id": "524c47a9-6dae-4d71-8991-66d76c46e426",
+                    "description": "Payment Uploaded, waiting confirmation from administrator"
+                }
+            ]
+        }
+    ]
+}
+```
+
+#### *Example Error Request*
+```
+curl --request GET \
+  --url http://127.0.0.1:8080/payment/admin/all_order \
+  --header 'token: 3133543'
+```
+
+#### *Error Response*
+```
+{
+    "status": 400,
+    "message": "Wrong Token."
+}
+```
+
+
+### 4.4. Admin View List Payment Proof
+
+#### *Description*
+
+Admin can view uploaded payment proof. This related with correct `order_code` given by Customer when upload payment proof. Only valid uploaded payment file will appear here. The `token` is still hardcode, related with `.env` file.
+
+#### *Example Success Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/view_proof \
+  --header 'content-type: application/json' \
+  --header 'token: 313354'
+```
+
+#### *Success Response*
+```
+{
+    "status": 200,
+    "data": [
+        {
+            "order_code": "hKL8Mq",
+            "coupon_code": null,
+            "coupon_value": null,
+            "payment_proof": "http://127.0.0.1:8080/payment/view/code/hKL8Mq",
+            "description": "Payment Uploaded, waiting confirmation from administrator",
+            "last_update": "2016-09-19 14:38:42"
+        },
+        {
+            "order_code": "hKL8Mq",
+            "coupon_code": null,
+            "coupon_value": null,
+            "payment_proof": "http://127.0.0.1:8080/payment/view/code/hKL8Mq",
+            "description": "Payment Uploaded, waiting confirmation from administrator",
+            "last_update": "2016-09-19 14:38:42"
+        }
+    ]
+}
+```
+
+#### *Example Error Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/view_proof \
+  --header 'content-type: application/json' \
+  --header 'token: 3133543'
+```
+
+#### *Error Response*
+```
+{
+    "status": 400,
+    "message": "Wrong Token."
+}
+```
+
+
+### 4.5. Admin View Individual Uploaded Payment Proof
+
+#### *Description*
+
+Admin can view upload payment proof that provide by Customer. Using Postman, it has a feature to show the image. The `token` is still hardcode, related with `.env` file.
+
+#### *Example Success Request*
+```
+curl -X GET -H "token: 313354" -H "Content-Type: application/json" \
+"http://127.0.0.1:8080/payment/view/code/hKL8Mq"
+```
 
 #### *Success Response*
 
+SHOW THE IMAGE
+
 #### *Example Error Request*
+```
+curl -X GET -H "token: 313354" -H "Content-Type: application/json" \
+"http://127.0.0.1:8080/payment/view/code/hKL8M"
+```
 
 #### *Error Response*
+```
+{
+  "status": 200,
+  "message": "Order code not found"
+}
+```
+
+
+### 4.6. Admin Confirm Order
+
+#### *Description*
+
+After check uploaded payment proof, Admin can confirm the order. The `token` is still hardcode, related with `.env` file.
+
+#### *Example Success Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/confirmation \
+  --header 'content-type: application/json' \
+  --header 'token: 313354' \
+  --data '{
+    "order_code":"Ocs3Bc"
+}'
+```
+
+#### *Success Response*
+```
+{
+    "status": 200,
+    "message": "Payment confirmed, waiting for Shipping Code"
+}
+```
+
+#### *Example Error Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/confirmation \
+  --header 'content-type: application/json' \
+  --header 'token: 313354' \
+  --data '{
+    "order_code":"Ocs3Bcs"
+}'
+```
+
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/confirmation \
+  --header 'content-type: application/json' \
+  --header 'token: 3133543' \
+  --data '{
+    "order_code":"Ocs3Bc"
+}'
+```
+
+#### *Error Response*
+```
+{
+    "status": 200,
+    "message": "Order code not found"
+}
+```
+
+```
+{
+    "status": 400,
+    "message": "Wrong Token."
+}
+```
+
+
+### 4.7. Admin Cancel Order
+
+#### *Description*
+
+Sometimes, Admin need to cancel the order.
+
+#### *Example Success Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/cancel \
+  --header 'content-type: application/json' \
+  --header 'token: 313354' \
+  --data '{
+    "order_code":"hKL8Mq"
+}'
+```
+
+#### *Success Response*
+```
+{
+    "status": 200,
+    "message": "Order is not valid, cancel transaction."
+}
+```
+
+#### *Example Error Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/cancel \
+  --header 'content-type: application/json' \
+  --header 'token: 313354' \
+  --data '{
+    "order_code":"hKL8M"
+}'
+```
+
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/cancel \
+  --header 'content-type: application/json' \
+  --header 'token: 3133543' \
+  --data '{
+    "order_code":"hKL8Mq"
+}'
+```
+
+#### *Error Response*
+```
+{
+    "status": 200,
+    "message": "Order code not found"
+}
+```
+
+```
+{
+    "status": 400,
+    "message": "Wrong Token."
+}
+```
+
+
+### 4.8. Admin Add Shipping Code
+
+#### *Description*
+
+So, everything looks good, and Admin need to input shipping code.
+
+#### *Example Success Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/shipping_code \
+  --header 'content-type: application/json' \
+  --header 'token: 313354' \
+  --data '{
+    "order_code":"hKL8Mq",
+    "shipping_code" : "354313"
+}'
+```
+
+#### *Success Response*
+```
+{
+    "status": 200,
+    "data": {
+        "shipping_code": "354313"
+    },
+    "message": "Shipping Code 354313, Thank You."
+}
+```
+
+#### *Example Error Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/shipping_code \
+  --header 'content-type: application/json' \
+  --header 'token: 313354' \
+  --data '{
+    "order_code":"hKL8q",
+    "shipping_code" : "354313"
+}'
+```
+
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/payment/admin/shipping_code \
+  --header 'content-type: application/json' \
+  --header 'token: 3133543' \
+  --data '{
+    "order_code":"hKL8Mq",
+    "shipping_code" : "354313"
+}'
+```
+#### *Error Response*
+```
+{
+    "status": 200,
+    "message": "Order code not found"
+}
+```
+
+```
+{
+    "status": 400,
+    "message": "Wrong Token."
+}
+```
+
+---
+
+
+## 5. Shipping
+
+### 5.1. Customer Detail Shipping
+
+#### *Description*
+
+Customer need to check `shipping_code` given by system.
+
+#### *Example Success Request*
+```
+curl --request GET \
+  --url http://127.0.0.1:8080/shipping/detail/354313
+```
+
+#### *Success Response*
+```
+{
+    "status": 200,
+    "data": [
+        {
+            "datetime": "2016-09-19 15:04:37",
+            "order_code": "hKL8Mq",
+            "shipping_code": "354313",
+            "description": "Your items already sent to Logistic Partner."
+        }
+    ]
+}
+```
+
+#### *Example Error Request*
+```
+curl --request GET \
+  --url http://127.0.0.1:8080/shipping/detail/3543133
+```
+
+#### *Error Response*
+```
+{
+    "status": 200,
+    "message": "Shipping code not found"
+}
+```
