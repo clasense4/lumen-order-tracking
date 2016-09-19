@@ -43,5 +43,6 @@ $app->group(['middleware' => ['token']], function ($app) {
     $app->get('payment/admin/all_order', 'App\Http\Controllers\PaymentController@all');
     $app->post('payment/admin/view_proof', 'App\Http\Controllers\PaymentController@viewUploadedProof');
     $app->post('payment/admin/confirmation', 'App\Http\Controllers\PaymentController@confirmation');
+    $app->post('payment/admin/cancel', 'App\Http\Controllers\PaymentController@Cancel');
     $app->post('payment/admin/shipping_code', 'App\Http\Controllers\PaymentController@shippingCode');
 });

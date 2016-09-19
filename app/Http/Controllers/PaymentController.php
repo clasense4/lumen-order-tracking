@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\Order;
 use App\Http\Models\OrderStatus;
+use App\Http\Models\OrderDetail;
 use App\Helpers\ResponseHelpers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -186,6 +187,65 @@ class PaymentController extends Controller
             'created_at' => time(),
             'updated_at' => time(),
         ]);
+
+        return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $message));
+    }
+
+    public function cancel(Request $request)
+    {
+        // check if input valid or invalid
+        $postJSON = $request->json()->all();
+        $v = \Validator::make($postJSON, ['order_code' => 'required']);
+
+        if ($v->fails()) {
+            return response()->json(ResponseHelpers::returnJson(Response::HTTP_BAD_REQUEST, $v->errors()->all()));
+        }
+
+        $error = false;
+        \DB::beginTransaction();
+        try {
+            // Update table order, update valid_date and valid_by
+            $order = Order::where('order_code', $postJSON['order_code'])->first();
+            if (!is_object($order)) {
+                return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code not found'));
+            }
+
+            $order->valid_by = null;
+            $order->valid_at = null;
+            // $order->save();
+
+            // Retrieve list of product, and increase the quantity
+            $order_details = OrderDetail::where('order_id', $order->order_id)->get();
+            foreach ($order_details as $key => $value) {
+                // print_r($order_detail);
+                \DB::table('product')->where('product_id','=',$value['product_id'])
+                    ->increment('quantity', $value['quantity']);
+            }
+
+            // Retrieve list of coupon
+            $increaseCoupon = \DB::table('coupon')->where('code','=',$order->coupon_code)->increment('quantity');
+
+            // Add to order status with status `5`, description `Order is not vali, cancel transactiond.`
+            $message = 'Order is not valid, cancel transaction.';
+            OrderStatus::create([
+                'order_status_id' => Uuid::uuid4(),
+                'order_id' => $order->order_id,
+                'status' => 5,
+                'description' => $message,
+                'created_at' => time(),
+                'updated_at' => time(),
+            ]);
+        } catch (Exception $e) {
+            $error = true;
+        }
+
+        if ($error) {
+            // rollback if any errors while saving the data
+            \DB::rollback();
+        } else {
+            // commit the transactions
+            \DB::commit();
+        }
 
         return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $message));
     }
