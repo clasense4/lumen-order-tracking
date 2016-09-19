@@ -39,10 +39,17 @@ $app->group(['prefix' => 'payment'], function () use ($app) {
     $app->post('proof/{order_code}', 'App\Http\Controllers\PaymentController@proof');
 });
 
+$app->group(['prefix' => 'shipping'], function () use ($app) {
+    // Customer detail shipping_code
+    $app->get('detail/{shipping_code}', 'App\Http\Controllers\ShippingController@detail');
+});
+
 $app->group(['middleware' => ['token']], function ($app) {
     $app->get('payment/admin/all_order', 'App\Http\Controllers\PaymentController@all');
     $app->post('payment/admin/view_proof', 'App\Http\Controllers\PaymentController@viewUploadedProof');
     $app->post('payment/admin/confirmation', 'App\Http\Controllers\PaymentController@confirmation');
     $app->post('payment/admin/cancel', 'App\Http\Controllers\PaymentController@Cancel');
     $app->post('payment/admin/shipping_code', 'App\Http\Controllers\PaymentController@shippingCode');
+    // Update shipping process
+    $app->post('shipping/update', 'App\Http\Controllers\ShippingController@update');
 });

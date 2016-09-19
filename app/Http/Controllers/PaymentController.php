@@ -192,6 +192,15 @@ class PaymentController extends Controller
             'updated_at' => time(),
         ]);
 
+        // Add to table OrderShipping
+        OrderShipping::create([
+            'order_shipping_id' => Uuid::uuid4(),
+            'order_id' => $order->order_id,
+            'order_code' => $order->order_code,
+            'shipping_code' => $order->shipping_code,
+            'description' => 'Your items already sent to Logistic Partner.',
+        ]);
+
         return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $message));
     }
 
