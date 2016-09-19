@@ -21,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
          * Can't continue when coupon code is not exists or expired
          */
         Validator::extend('valid_coupon', function($attribute, $value, $parameters, $validator) {
+            if (is_array($value)) {
+                return false;
+            }
+
             $model = Coupon::where([
                 ['code', '=', $value],
                 ['quantity', '>', 0],
