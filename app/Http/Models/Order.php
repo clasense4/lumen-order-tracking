@@ -25,6 +25,11 @@ class Order extends Model
         "products.*.quantity" => "required|numeric|between:1,20",
         // "user_id" => "required",
         "coupon_code" => "valid_coupon",
+        "customer" => "required",
+        "customer.name" => "required",
+        "customer.phone_number" => "required",
+        "customer.address" => "required",
+        "customer.email" => "required",
     ];
 
     public static $messages = [
