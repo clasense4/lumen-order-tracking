@@ -1439,3 +1439,52 @@ curl --request GET \
     "message": "Shipping code not found"
 }
 ```
+
+
+### 5.2. Admin Update Detail Shipping
+
+#### *Description*
+
+Admin can update the order shipping status. But, this is actually can be done automatically.
+
+#### *Example Success Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/shipping/update \
+  --header ': ' \
+  --header 'content-type: application/json' \
+  --header 'token: 313354' \
+  --data '{
+    "shipping_code":"354313",
+    "description":"Arrive at destination"
+}'
+```
+
+#### *Success Response*
+```
+{
+    "status": 200,
+    "message": "Shipping detail added."
+}
+```
+
+#### *Example Error Request*
+```
+curl --request POST \
+  --url http://127.0.0.1:8080/shipping/update \
+  --header ': ' \
+  --header 'content-type: application/json' \
+  --header 'token: 313354' \
+  --data '{
+    "shipping_code":"3543133",
+    "description":"Arrive at destination"
+}'
+```
+
+#### *Error Response*
+```
+{
+    "status": 200,
+    "message": "Shipping code not found"
+}
+```
