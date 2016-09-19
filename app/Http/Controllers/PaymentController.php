@@ -201,7 +201,7 @@ class PaymentController extends Controller
             'description' => 'Your items already sent to Logistic Partner.',
         ]);
 
-        return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $message));
+        return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $message, ['shipping_code' => $order->shipping_code]));
     }
 
     public function cancel(Request $request)
