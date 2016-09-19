@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\Order;
 use App\Http\Models\OrderStatus;
 use App\Http\Models\OrderDetail;
+use App\Http\Models\OrderShipping;
 use App\Helpers\ResponseHelpers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -134,7 +135,10 @@ class PaymentController extends Controller
         }
 
         // Update table order, update valid_date and valid_by
-        $order = Order::where('order_code', $postJSON['order_code'])->first();
+        $order = Order::where([
+            ['order_code', $postJSON['order_code']],
+            ['payment_file', '!=', null]
+        ])->first();
         if (!is_object($order)) {
             return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code not found'));
         }
