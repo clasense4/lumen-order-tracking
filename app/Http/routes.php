@@ -32,12 +32,14 @@ $app->group(['prefix' => 'order'], function () use ($app) {
 });
 
 $app->group(['prefix' => 'payment'], function () use ($app) {
-    $app->post('{order_code}', 'App\Http\Controllers\PaymentController@proof');
+    $app->post('proof/{order_code}', 'App\Http\Controllers\PaymentController@proof');
     $app->get('detail/{order_code}', 'App\Http\Controllers\PaymentController@detail');
-    $app->get('view/{order_code}', 'App\Http\Controllers\PaymentController@viewFile');
+    $app->get('view/code/{order_code}', 'App\Http\Controllers\PaymentController@viewFileByOrderCode');
+    $app->get('view/file/{payment_file}', 'App\Http\Controllers\PaymentController@viewFileByPaymentFile');
 });
 
 $app->group(['middleware' => ['token']], function ($app) {
+    $app->post('payment/admin/view_proof', 'App\Http\Controllers\PaymentController@viewUploadedProof');
     $app->post('payment/admin/confirmation', 'App\Http\Controllers\PaymentController@confirmation');
     $app->post('payment/admin/shipping_code', 'App\Http\Controllers\PaymentController@shippingCode');
 });

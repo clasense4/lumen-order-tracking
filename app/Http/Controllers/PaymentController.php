@@ -42,7 +42,7 @@ class PaymentController extends Controller
         // Order code not found
         $order = Order::where('order_code', $order_code)->first();
         if (!is_object($order)) {
-            return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code ot found'));
+            return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code not found'));
         }
 
         // Get uploaded file
@@ -87,13 +87,13 @@ class PaymentController extends Controller
             ->select(['total', 'order_code', 'shipping_code', 'updated_at as last_update', \DB::raw('(select description as status from order_status where order_status.order_id = "order".order_id order by updated_at desc limit 1)')])
             ->where('order_code', $order_code)->first();
         if (!is_object($order)) {
-            return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code ot found'));
+            return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code not found'));
         }
 
         return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, '', $order));
     }
 
-    public function viewFile(Request $request, $order_code)
+    public function viewFileByOrderCode(Request $request, $order_code)
     {
         // No order Code
         if (empty($order_code)) {
@@ -104,7 +104,7 @@ class PaymentController extends Controller
         $orderObj = Order::where('order_code', $order_code);
         $order = $orderObj->select(['total', 'order_code', 'shipping_code', 'updated_at as last_update'])->first();
         if (!is_object($order)) {
-            return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code ot found'));
+            return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code not found'));
         }
 
         // Retrieve payment_file and display it
@@ -127,6 +127,10 @@ class PaymentController extends Controller
 
         // Update table order, update valid_date and valid_by
         $order = Order::where('order_code', $postJSON['order_code'])->first();
+        if (!is_object($order)) {
+            return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code not found'));
+        }
+
         $order->valid_by = 1;
         $order->valid_at = Carbon::now();
         $order->save();
@@ -157,7 +161,12 @@ class PaymentController extends Controller
 
         // Update table order, update valid_date and valid_by
         $order = Order::where('order_code', $postJSON['order_code'])->first();
+        if (!is_object($order)) {
+            return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, 'Order code not found'));
+        }
+
         $order->shipping_code = $postJSON['shipping_code'];
+        $order->shipped = 1;
         $order->save();
 
         // Add to order status with status `4`, description `Shipping Code {shipping_code}, Thank You.`
@@ -172,5 +181,33 @@ class PaymentController extends Controller
         ]);
 
         return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $message));
+    }
+
+    public function viewUploadedProof(Request $request)
+    {
+        // Find Order with order_status = 2 (uploaded)
+        $payment_url = env('BASE_URL').'payment/view/code/';
+        $order = \DB::table('order')
+            ->select(
+                [
+                    'order.order_code',
+                    'order.coupon_code',
+                    'order.coupon_value',
+                    \DB::raw('concat(\''.$payment_url.'\',order_code) as payment_proof'),
+                    'order_status.description',
+                    'order.updated_at as last_update'
+                ])
+            ->join('order_status', 'order_status.order_id', '=', 'order.order_id')
+            ->where('order_status.status', 2)
+            ->where('order.shipped','=', null)
+            ->where('order.valid_by','=', null)
+            ->get();
+
+        if (sizeof($order) == 0) {
+            $msg = 'No Payment need to confirm.';
+        } else {
+            $msg = '';
+        }
+        return response()->json(ResponseHelpers::returnJson(Response::HTTP_OK, $msg, $order));
     }
 }

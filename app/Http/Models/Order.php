@@ -157,7 +157,7 @@ class Order extends Model
         } else {
             // commit the transactions
             DB::commit();
-            $message = "Order success. Please paid ".$summaryProduct['total']." and upload payment proof to this URL " . env('BASE_URL') . "payment/" . $summaryProduct['order_code'];
+            $message = "Order success. Please paid ".$summaryProduct['total']." and upload payment proof to this URL " . env('BASE_URL') . "payment/proof/" . $summaryProduct['order_code'];
         }
 
         return ['status' => true, 'message' => $message, 'data' => $summaryProduct];
