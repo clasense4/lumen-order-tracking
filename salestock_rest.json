@@ -1,11 +1,11 @@
 {
   "_type": "export",
   "__export_format": 2,
-  "__export_date": "2016-09-19T06:55:27.413Z",
+  "__export_date": "2016-09-19T08:59:50.018Z",
   "__export_source": "insomnia.desktop.app:v3.4.1",
   "resources": [
     {
-      "modified": 1474268111974,
+      "modified": 1474275086779,
       "created": 1474073091072,
       "parentId": null,
       "name": "SaleStock",
@@ -26,7 +26,7 @@
     {
       "name": "Default Jar",
       "cookies": [],
-      "modified": 1474267769903,
+      "modified": 1474275130686,
       "created": 1474073212737,
       "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
       "_id": "jar_it6h4qblZ9Ncet2v2rH69",
@@ -69,6 +69,15 @@
       "_type": "request_group"
     },
     {
+      "name": "Shipping",
+      "environment": {},
+      "modified": 1474271675019,
+      "created": 1474271675019,
+      "parentId": "wrk_it6h24g0WGMGTrwNDunQd",
+      "_id": "fld_it9ragsrXYfYFHXEeWfH8Tg6",
+      "_type": "request_group"
+    },
+    {
       "url": "{{ base_url }}/",
       "name": "Hello",
       "method": "GET",
@@ -106,7 +115,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474130271605,
+      "modified": 1474271858600,
       "created": 1474079390835,
       "parentId": "fld_it6mj6l8nJB8TECRagGsQ6Zy",
       "_id": "req_it6kt5df88yEguWaGrQ7nPJG",
@@ -317,7 +326,7 @@
       "url": "{{ base_url }}/payment/admin/confirmation",
       "name": "Admin Confirm Order",
       "method": "POST",
-      "body": "{\n\t\"order_code\":\"MXfcee\"\n}",
+      "body": "{\n\t\"order_code\":\"Ocs3Bc\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -330,7 +339,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474263939477,
+      "modified": 1474274125522,
       "created": 1474224686667,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it8zbccrgtW3paRaMmMU9EHB",
@@ -340,7 +349,7 @@
       "url": "{{ base_url }}/payment/admin/shipping_code",
       "name": "Admin Add Shipping Code",
       "method": "POST",
-      "body": "{\n\t\"order_code\":\"MXfcee\",\n\t\"shipping_code\" : \"354313\"\n}",
+      "body": "{\n\t\"order_code\":\"Ocs3Bc\",\n\t\"shipping_code\" : \"354313\"\n}",
       "parameters": [],
       "headers": [
         {
@@ -353,7 +362,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474255871558,
+      "modified": 1474274377875,
       "created": 1474225737258,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it8zxuzu5Sf8XugWxzJpUuqG",
@@ -361,13 +370,13 @@
     },
     {
       "url": "{{ base_url }}/payment/detail/ZdCpLn",
-      "name": "Detail Order for Customer",
+      "name": "Customer Detail Order",
       "method": "GET",
       "body": "",
       "parameters": [],
       "headers": [],
       "authentication": {},
-      "modified": 1474267355430,
+      "modified": 1474271782830,
       "created": 1474255933597,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it9hx2n1QZs6TKwNPuj5ZU9z",
@@ -377,7 +386,7 @@
       "url": "{{ base_url }}/payment/admin/view_proof",
       "name": "Admin View Payment Proof",
       "method": "POST",
-      "body": "{\n\t\"order_code\":\"ZdCpLn\"\n}",
+      "body": "",
       "parameters": [],
       "headers": [
         {
@@ -390,7 +399,7 @@
         }
       ],
       "authentication": {},
-      "modified": 1474267373771,
+      "modified": 1474271164448,
       "created": 1474256009178,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it9hyoyiUgZpj3ZDkJmZFtNB",
@@ -400,20 +409,16 @@
       "url": "{{ base_url }}/payment/admin/all_order",
       "name": "Admin View All Orders",
       "method": "GET",
-      "body": "{\n\t\"order_code\":\"MXfcee\"\n}",
+      "body": "",
       "parameters": [],
       "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json"
-        },
         {
           "name": "token",
           "value": "313354"
         }
       ],
       "authentication": {},
-      "modified": 1474260145212,
+      "modified": 1474270950930,
       "created": 1474260119542,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it9kesjaCmCa9AseW7e6CpYt",
@@ -440,6 +445,47 @@
       "created": 1474263925708,
       "parentId": "fld_it8zb3rhtVfsYx5r865RTDBR",
       "_id": "req_it9mode4T486X3KMDqADmjfT",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/shipping/detail/354313",
+      "name": "Customer Detail Shipping",
+      "method": "GET",
+      "body": "",
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "modified": 1474274520279,
+      "created": 1474271693798,
+      "parentId": "fld_it9ragsrXYfYFHXEeWfH8Tg6",
+      "_id": "req_it9ravaevhWpA66C58CWc9HH",
+      "_type": "request"
+    },
+    {
+      "url": "{{ base_url }}/shipping/update",
+      "name": "Admin Update Detail Shipping",
+      "method": "POST",
+      "body": "{\n\t\"shipping_code\":\"354313\",\n\t\"description\":\"Arrive at destination\"\n}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "token",
+          "value": "313354"
+        },
+        {
+          "name": "",
+          "value": ""
+        }
+      ],
+      "authentication": {},
+      "modified": 1474275049053,
+      "created": 1474271758788,
+      "parentId": "fld_it9ragsrXYfYFHXEeWfH8Tg6",
+      "_id": "req_it9rc9fojqyXZX79KyYdBxxg",
       "_type": "request"
     }
   ]
